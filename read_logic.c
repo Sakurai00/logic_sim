@@ -1,15 +1,27 @@
+/**
+ * @file read_logic.c
+ * @author Sakurai
+ * @brief 論理回路読み込み
+ * @version 0.1
+ * @date 2021-11-17
+ */
+
 #include "read_logic.h"
 
+// prototype
 int find_gate(char* name);
 logic_gate* make_gate(char* name);
 
+// global variable
 const char* filename = "logic.txt";
-
 logic_gate* node_list[128];
 int gate_num = 0;
-
 int out_list[128];
 
+/**
+ * @brief ファイルから回路データを読み込む
+ *
+ */
 void read_logic() {
     FILE* fp = fopen(filename, "r");
     char buf[1024];
@@ -31,7 +43,6 @@ void read_logic() {
             gate = node_list[gate_index];
         };
 
-
         fscanf(fp, "%s", buf);
         if (strcmp(buf, "AND") == 0) {
             gate->type = AND;
@@ -52,7 +63,6 @@ void read_logic() {
             printf("Error: Unknown gate type!\n");
             exit(1);
         }
-
 
         // 入力ゲート設定
         for (int input_num = 0; input_num < gate->in_num; input_num++) {
@@ -85,6 +95,12 @@ void read_logic() {
     }
 }
 
+/**
+ * @brief nodo_list内に対象のゲートがあるか調べる
+ *
+ * @param name 探索対象のゲート名
+ * @return int 存在すればインデックス，存在しなければ-1を返す
+ */
 int find_gate(char* name) {
     for (int i = 0; i < gate_num; i++) {
         if (strcmp(name, node_list[i]->name) == 0) {
@@ -94,8 +110,13 @@ int find_gate(char* name) {
     return -1;
 }
 
+/**
+ * @brief logic_gateを一つ作成する
+ *
+ * @param name ゲート名
+ * @return logic_gate* 作成した構造体へのポインタ
+ */
 logic_gate* make_gate(char* name) {
-    // 構造体を一つ確保し，名前を初期化
     logic_gate* gate = malloc(sizeof(logic_gate));
     strcpy(gate->name, name);
     gate->type = WIRE;
@@ -108,6 +129,10 @@ logic_gate* make_gate(char* name) {
     return gate;
 }
 
+/**
+ * @brief test for read_logic()
+ *
+ */
 void test_read_logic() {
     read_logic();
 
