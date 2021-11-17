@@ -1,5 +1,5 @@
 # 実行ファイル名
-TARGET = sim
+TARGET = sim.out
 
 # 対象ソースコード
 SRCS = main.c read_logic.c

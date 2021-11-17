@@ -1,0 +1,15 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc-9 アクティブなファイルのビルド",
+            "command": "make",
+            "args": [
+                "all"
+            ],
+            "group": "build",
+            "detail": "デバッガーによって生成されたタスク。"
+        }
+    ],
+    "version": "2.0.0"
+}
