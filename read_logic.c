@@ -1,5 +1,8 @@
 #include "read_logic.h"
 
+int find_gate(char* name);
+logic_gate* make_gate(char* name);
+
 const char* filename = "logic.txt";
 
 logic_gate* node_list[128];

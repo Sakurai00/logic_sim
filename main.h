@@ -1,9 +1,6 @@
-#ifndef MAIN
-#define MAIN
+#pragma once
 
 #include <stdbool.h>
-
-// #include "read_logic.h"
 
 enum logic { WIRE, AND, OR, NOT, XOR, NOR, NAND };
 
@@ -22,5 +19,3 @@ typedef struct logic_gate logic_gate;
 
 extern logic_gate *node_list[128];
 extern int gate_num;
-
-#endif
