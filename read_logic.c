@@ -2,6 +2,9 @@
 
 const char* filename = "logic.txt";
 
+logic_gate node_list[128];
+int gate_num = 0;
+
 void read_logic() {
     FILE *fp = fopen(filename, "r");
     char buf[1024];

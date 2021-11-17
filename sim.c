@@ -18,13 +18,11 @@ int sim(void) {
                     case wire:
                         break;
                     case and:
-                        sum+=node_list
-                    case or:
-                        for(j = 0; j < num; j++){
-                            sum += (node_list[i]in_gate[j].value);
-                        }
-                        if((sum / num) == 1) node_list[i].value = 1;
-                        else node_list[i].value = 0;
+                        sum+=node_list[i].in_gate[0].value;
+                        sum+=node_list[i].in_gate[1].value;
+
+                        if(sum)
+                    
                 }
             }
           

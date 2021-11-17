@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#include "read_logic.h"
+
 enum logic { wire, and, or, not, xor, nor, nand };
 
 typedef struct {
