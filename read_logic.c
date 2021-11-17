@@ -6,14 +6,13 @@ logic_gate* make_gate(char* name);
 const char* filename = "logic.txt";
 
 logic_gate* node_list[128];
-int gate_num;
+int gate_num = 0;
 
 int out_list[128];
 
 void read_logic() {
     FILE* fp = fopen(filename, "r");
     char buf[1024];
-    gate_num = 0;
 
     if (fp == NULL) {
         printf("Error opening file!\n");
@@ -69,6 +68,8 @@ void read_logic() {
             }
         }
     }
+
+    fclose(fp);
 
     // 出力ゲート設定
     for (int i = 0; i < gate_num; i++) {
