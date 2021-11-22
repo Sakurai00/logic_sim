@@ -8,13 +8,13 @@ SRCS = main.c read_logic.c
 OBJS = $(SRCS:.c=.o)
 
 # コンパイラ
-CC = gcc
+CC = clang
 
 # コンパイルオプション
 CFLAGS = -Wall -g
 
 # Includeディレクトリ
-INCDIR = -I.
+INCDIR = -I .
 
 # ライブラリディレクトリ
 LIBDIR =
@@ -25,7 +25,7 @@ LIBS =
 
 # ターゲット生成
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) $(LIBDIR) $(LIBS)
+	$(CC) $(OBJS) -o $(TARGET) $(LIBDIR) $(LIBS)
 
 # オブジェクトファイル生成
 $(OBJS): $(SRCS)
