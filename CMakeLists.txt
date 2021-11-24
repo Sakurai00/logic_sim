@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 # add_executable(sim.out main.c read_input.c read_logic.c sim.c)
-add_executable(sim.out main.c read_logic.c)
+add_executable(sim.out main.c read_input.c read_logic.c sim.c output.c)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

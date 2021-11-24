@@ -9,25 +9,25 @@
 #include "read_logic.h"
 
 // prototype
-int find_gate(char* name);
 logic_gate* make_gate(char* name);
 
 // global variable
-const char* filename = "logic.txt";
 logic_gate* node_list[128];
 int gate_num = 0;
-int out_list[128];
+int out_num_list[128];
 
 /**
  * @brief ファイルから回路データを読み込む
  *
  */
 void read_logic() {
+    const char* filename = "logic.txt";
+
     FILE* fp = fopen(filename, "r");
     char buf[1024];
 
     if (fp == NULL) {
-        printf("Error opening file!\n");
+        printf("Error opening logic.txt\n");
         exit(1);
     }
 
@@ -89,8 +89,8 @@ void read_logic() {
             logic_gate* base_gate = out_gate->in_gate[j];
 
             // 入力元の出力先にnode_list[i]を追加
-            base_gate->out_gate[out_list[i]] = out_gate;
-            out_list[i]++;
+            base_gate->out_gate[out_num_list[i]] = out_gate;
+            out_num_list[i]++;
         }
     }
 }
@@ -144,7 +144,7 @@ void test_read_logic() {
         }
         printf("\n");
         printf("    OUT: ");
-        for (int j = 0; j < out_list[i]; j++) {
+        for (int j = 0; j < out_num_list[i]; j++) {
             printf("%s ", node_list[i]->out_gate[j]->name);
         }
         printf("\n");
