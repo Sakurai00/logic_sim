@@ -2,7 +2,7 @@
  * @file read_logic.c
  * @author Sakurai
  * @brief 論理回路読み込み
- * @version 0.1
+ * @version 0.2
  * @date 2021-11-17
  */
 
@@ -31,6 +31,7 @@ void read_logic() {
     }
 
     while (fscanf(fp, "%s", buf) != EOF) {
+        // 操作対象ゲート
         logic_gate* gate;
 
         int gate_index = find_gate(buf);
@@ -40,7 +41,7 @@ void read_logic() {
 
         } else {
             gate = node_list[gate_index];
-        };
+        }
 
         fscanf(fp, "%s", buf);
         if (strcmp(buf, "AND") == 0) {
@@ -54,6 +55,9 @@ void read_logic() {
             gate->in_num = 1;
         } else if (strcmp(buf, "XOR") == 0) {
             gate->type = XOR;
+            gate->in_num = 2;
+        } else if (strcmp(buf, "NOR") == 0) {
+            gate->type = NOR;
             gate->in_num = 2;
         } else if (strcmp(buf, "NAND") == 0) {
             gate->type = NAND;
@@ -92,6 +96,7 @@ void read_logic() {
             out_num_list[i]++;
         }
     }
+    return;
 }
 
 /**
@@ -116,7 +121,7 @@ int find_gate(char* name) {
  * @return logic_gate* 作成した構造体へのポインタ
  */
 logic_gate* make_gate(char* name) {
-    logic_gate* gate = malloc(sizeof(logic_gate));
+    logic_gate* gate = (logic_gate*)malloc(sizeof(logic_gate));
     strcpy(gate->name, name);
     gate->type = WIRE;
     gate->value = -1;
@@ -148,4 +153,5 @@ void test_read_logic() {
         }
         printf("\n");
     }
+    return;
 }

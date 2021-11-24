@@ -10,6 +10,7 @@ void read_input() {
         printf("Error opening imput.txt");
         exit(1);
     }
+
     while (fscanf(fp, "%s%d", gate_name, &gate_input) != EOF) {
         logic_gate* gate;
         int gate_index = find_gate(gate_name);
@@ -22,6 +23,7 @@ void read_input() {
         gate->value = gate_input;
     }
     fclose(fp);
+    return;
 }
 
 void test_read_input() {
@@ -30,10 +32,5 @@ void test_read_input() {
     for (int i = 0; i < gate_num; i++) {
         printf("%s %d\n", node_list[i]->name, node_list[i]->value);
     }
+    return;
 }
-
-/* input.txt
-G1 1
-G2 0
-G3 1
-*/
