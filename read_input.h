@@ -1,5 +1,7 @@
 #pragma once
 
+#define INPUT_FILENAME "input.txt"
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,14 +1,13 @@
 #include "read_input.h"
 
 void read_input() {
-    const char* filename = "input.txt";
     char gate_name[128];
     int gate_input;
 
-    FILE* fp = fopen(filename, "r");
+    FILE* fp = fopen(INPUT_FILENAME, "r");
 
     if (fp == NULL) {
-        printf("not open");
+        printf("Error opening imput.txt");
         exit(1);
     }
     while (fscanf(fp, "%s%d", gate_name, &gate_input) != EOF) {

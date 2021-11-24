@@ -21,10 +21,9 @@ int out_num_list[128];
  *
  */
 void read_logic() {
-    const char* filename = "logic.txt";
-
-    FILE* fp = fopen(filename, "r");
     char buf[1024];
+
+    FILE* fp = fopen(LOGIC_FILENAME, "r");
 
     if (fp == NULL) {
         printf("Error opening logic.txt\n");

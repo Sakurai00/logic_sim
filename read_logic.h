@@ -1,5 +1,7 @@
 #pragma once
 
+#define LOGIC_FILENAME "logic.txt"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
