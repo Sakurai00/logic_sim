@@ -7,31 +7,11 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Launch",
-            "program": "${workspaceFolder}/sim.out",
+            "name": "Debug",
+            "program": "${workspaceFolder}/build/sim.out",
             "args": [],
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "name": "gdb debug",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/sim.out",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "gdb の再フォーマットを有効にする",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: gcc-9 アクティブなファイルのビルド",
-            "miDebuggerPath": "/bin/gdb"
+            "cwd": "${workspaceFolder}/build/",
+            "console": "integratedTerminal"
         }
     ]
 }

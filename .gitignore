@@ -1,3 +1,7 @@
+build/*
+!build/logic.txt
+!build/input.txt
+
 # Prerequisites
 *.d
 
