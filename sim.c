@@ -3,7 +3,7 @@
 void sim(void) {
     int flag = 1;
     int sum = 0;
-    bool is_update = true;
+    bool is_updatable = true;
 
     while (flag == 1) {
         flag = 0;
@@ -11,15 +11,15 @@ void sim(void) {
             logic_gate* gate = node_list[i];
 
             //値が更新可能？
-            is_update = true;
+            is_updatable = true;
 
-            if (gate->value != -1) is_update = false;
+            if (gate->value != -1) is_updatable = false;
 
             for (int j = 0; j < gate->in_num; j++) {
-                if (gate->in_gate[j]->value == -1) is_update = false;
+                if (gate->in_gate[j]->value == -1) is_updatable = false;
             }
 
-            if (is_update == true) {
+            if (is_updatable == true) {
                 //値の更新処理
                 sum = 0;
                 switch (gate->type) {
