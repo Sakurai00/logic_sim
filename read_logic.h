@@ -13,3 +13,5 @@ extern void read_logic();
 extern int find_gate(char* name);
 
 extern void test_read_logic();
+
+extern void clear_logic();

@@ -26,7 +26,7 @@ void read_logic() {
     FILE* fp = fopen(LOGIC_FILENAME, "r");
 
     if (fp == NULL) {
-        printf("Error opening logic.txt\n");
+        printf("Error: opening logic.txt\n");
         exit(1);
     }
 
@@ -152,6 +152,14 @@ void test_read_logic() {
             printf("%s ", node_list[i]->out_gate[j]->name);
         }
         printf("\n");
+    }
+    return;
+}
+
+
+void clear_logic() {
+    for (int i = 0; i < gate_num; i++) {
+        free(node_list[i]);
     }
     return;
 }

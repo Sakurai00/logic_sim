@@ -8,5 +8,6 @@ int main(void) {
     read_input();
     sim();
     output();
+    clear_logic();
     return 0;
 }
