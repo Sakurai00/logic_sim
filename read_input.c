@@ -1,7 +1,7 @@
 #include "read_input.h"
 
 void read_input() {
-    char gate_name[128];
+    char gate_name[MAX_GATE_NAME_LEN];
     int gate_input;
 
     FILE* fp = fopen(INPUT_FILENAME, "r");

@@ -2,8 +2,8 @@
  * @file read_logic.c
  * @author Sakurai
  * @brief 論理回路読み込み
- * @version 0.2
- * @date 2021-11-17
+ * @version 0.3
+ * @date 2021-11-28
  */
 
 #include "read_logic.h"
@@ -12,16 +12,16 @@
 logic_gate* make_gate(char* name);
 
 // global variable
-logic_gate* node_list[128];
+logic_gate* node_list[MAX_GATE_NUM];
 int gate_num = 0;
-int out_num_list[128];
+int out_num_list[MAX_GATE_NUM];
 
 /**
  * @brief ファイルから回路データを読み込む
  *
  */
 void read_logic() {
-    char buf[1024];
+    char buf[MAX_BUF];
 
     FILE* fp = fopen(LOGIC_FILENAME, "r");
 
