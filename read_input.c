@@ -20,9 +20,16 @@ void read_input() {
         } else {
             gate = node_list[gate_index];
         }
-        gate->value = gate_input;
+
+        if (gate_input != -1) {
+            gate->value = gate_input;
+            gate->is_input = true;
+        } else if (gate_input == -1) {
+            gate->is_output = true;
+        }
     }
     fclose(fp);
+
     return;
 }
 
