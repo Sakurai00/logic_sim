@@ -1,6 +1,13 @@
 #include "read_logic.h"
+#include "read_input.h"
+#include "sim.h"
+#include "output.h"
 
 int main(void) {
-    test_read_logic();
+    read_logic();
+    read_input();
+    sim();
+    output();
+    clear_logic();
     return 0;
 }

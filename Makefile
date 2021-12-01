@@ -2,7 +2,7 @@
 TARGET = sim.out
 
 # 対象ソースコード
-SRCS = main.c read_logic.c
+SRCS = main.c read_logic.c read_input.c output.c sim.c
 
 # オブジェクトファイル
 OBJS = $(SRCS:.c=.o)

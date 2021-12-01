@@ -2,36 +2,36 @@
  * @file read_logic.c
  * @author Sakurai
  * @brief 論理回路読み込み
- * @version 0.1
- * @date 2021-11-17
+ * @version 0.3
+ * @date 2021-11-28
  */
 
 #include "read_logic.h"
 
 // prototype
-int find_gate(char* name);
 logic_gate* make_gate(char* name);
 
 // global variable
-const char* filename = "logic.txt";
-logic_gate* node_list[128];
+logic_gate* node_list[MAX_GATE_NUM];
 int gate_num = 0;
-int out_list[128];
+int out_num_list[MAX_GATE_NUM];
 
 /**
  * @brief ファイルから回路データを読み込む
  *
  */
 void read_logic() {
-    FILE* fp = fopen(filename, "r");
-    char buf[1024];
+    char buf[MAX_BUF];
+
+    FILE* fp = fopen(LOGIC_FILENAME, "r");
 
     if (fp == NULL) {
-        printf("Error opening file!\n");
+        printf("Error: opening logic.txt\n");
         exit(1);
     }
 
     while (fscanf(fp, "%s", buf) != EOF) {
+        // 操作対象ゲート
         logic_gate* gate;
 
         int gate_index = find_gate(buf);
@@ -41,7 +41,7 @@ void read_logic() {
 
         } else {
             gate = node_list[gate_index];
-        };
+        }
 
         fscanf(fp, "%s", buf);
         if (strcmp(buf, "AND") == 0) {
@@ -55,6 +55,9 @@ void read_logic() {
             gate->in_num = 1;
         } else if (strcmp(buf, "XOR") == 0) {
             gate->type = XOR;
+            gate->in_num = 2;
+        } else if (strcmp(buf, "NOR") == 0) {
+            gate->type = NOR;
             gate->in_num = 2;
         } else if (strcmp(buf, "NAND") == 0) {
             gate->type = NAND;
@@ -89,10 +92,11 @@ void read_logic() {
             logic_gate* base_gate = out_gate->in_gate[j];
 
             // 入力元の出力先にnode_list[i]を追加
-            base_gate->out_gate[out_list[i]] = out_gate;
-            out_list[i]++;
+            base_gate->out_gate[out_num_list[i]] = out_gate;
+            out_num_list[i]++;
         }
     }
+    return;
 }
 
 /**
@@ -117,7 +121,7 @@ int find_gate(char* name) {
  * @return logic_gate* 作成した構造体へのポインタ
  */
 logic_gate* make_gate(char* name) {
-    logic_gate* gate = malloc(sizeof(logic_gate));
+    logic_gate* gate = (logic_gate*)malloc(sizeof(logic_gate));
     strcpy(gate->name, name);
     gate->type = WIRE;
     gate->value = -1;
@@ -144,9 +148,18 @@ void test_read_logic() {
         }
         printf("\n");
         printf("    OUT: ");
-        for (int j = 0; j < out_list[i]; j++) {
+        for (int j = 0; j < out_num_list[i]; j++) {
             printf("%s ", node_list[i]->out_gate[j]->name);
         }
         printf("\n");
     }
+    return;
+}
+
+
+void clear_logic() {
+    for (int i = 0; i < gate_num; i++) {
+        free(node_list[i]);
+    }
+    return;
 }

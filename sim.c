@@ -1,31 +1,67 @@
-#include <sim.h>
+#include "sim.h"
 
-int sim(void) {
-    int flag, i, j,num;
-    int m = 0;
-    int sum=0;
+void sim(void) {
+    int flag = 1;
+    int sum = 0;
+    bool is_updatable = true;
 
-    for (flag = 1; flag == 1; flag = 0) {
-        for (i = 0; i <= 17; i++) {
+    while (flag == 1) {
+        flag = 0;
+        for (int i = 0; i < gate_num; i++) {
+            logic_gate* gate = node_list[i];
+
             //値が更新可能？
-            num=node_list[i].in_num;
-            for (j = 0; j < num; j++) {
-                if (node_list[i].in_gate[j] != -1) m++;
-            }
-            //値の更新処理
-            if ((m + 1) == num){
-                switch(node_list[i].type){
-                    case wire:
-                        break;
-                    case and:
-                        sum+=node_list[i].in_gate[0].value;
-                        sum+=node_list[i].in_gate[1].value;
+            is_updatable = true;
 
-                        if(sum)
-                    
-                }
+            if (gate->value != -1) is_updatable = false;
+
+            for (int j = 0; j < gate->in_num; j++) {
+                if (gate->in_gate[j]->value == -1) is_updatable = false;
             }
-          
-        }
-    }
+
+            if (is_updatable == true) {
+                //値の更新処理
+                sum = 0;
+                switch (gate->type) {
+                    case WIRE:
+                        break;
+                    case AND:
+                        gate->value =
+                            gate->in_gate[0]->value & gate->in_gate[1]->value;
+                        break;
+
+                    case OR:
+                        gate->value =
+                            gate->in_gate[0]->value | gate->in_gate[1]->value;
+                        break;
+
+                    case NOT:
+                        gate->value = !(gate->in_gate[0]->value);
+                        break;
+
+                    case XOR:
+                        sum += gate->in_gate[0]->value;
+                        sum += gate->in_gate[1]->value;
+
+                        if (sum == 1)
+                            gate->value = 1;
+                        else
+                            gate->value = 0;
+                        break;
+
+                    case NOR:
+                        gate->value =
+                            !(gate->in_gate[0]->value | gate->in_gate[1]->value);
+                        break;
+
+                    case NAND:
+                        gate->value =
+                            !(gate->in_gate[0]->value & gate->in_gate[1]->value);
+                        break;
+                }
+                flag = 1;
+            } // end of update
+        } // enf of all gate check
+    } // end of main loop
+    return;
 }

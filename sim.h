@@ -1,4 +1,8 @@
 #pragma once
 
-#include<main.h>
-#include<stdio.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+#include "main.h"
+
+extern void sim(void);
