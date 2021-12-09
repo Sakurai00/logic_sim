@@ -4,14 +4,33 @@
     // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug",
-            "program": "${workspaceFolder}/build/sim.out",
-            "args": [],
-            "cwd": "${workspaceFolder}/build/",
-            "console": "integratedTerminal"
-        }
+    {
+        "name": "(gdb) 起動",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/sim.out",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${fileDirname}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "gdb の再フォーマットを有効にする",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            }
+        ]
+    },
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug",
+        //     "program": "${workspaceFolder}/build/sim.out",
+        //     "args": [],
+        //     "cwd": "${workspaceFolder}/build/",
+        //     "console": "integratedTerminal"
+        // }
     ]
 }

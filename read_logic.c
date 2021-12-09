@@ -14,7 +14,7 @@ logic_gate* make_gate(char* name);
 // global variable
 logic_gate* node_list[MAX_GATE_NUM];
 int gate_num = 0;
-int out_num_list[MAX_GATE_NUM];
+//int out_num_list[MAX_GATE_NUM];
 
 /**
  * @brief ファイルから回路データを読み込む
@@ -92,10 +92,11 @@ void read_logic() {
             logic_gate* base_gate = out_gate->in_gate[j];
 
             // 入力元の出力先にnode_list[i]を追加
-            base_gate->out_gate[out_num_list[i]] = out_gate;
-            out_num_list[i]++;
+            base_gate->out_gate[base_gate->out_num] = out_gate;
+            base_gate->out_num++;
         }
     }
+
     return;
 }
 
@@ -148,7 +149,7 @@ void test_read_logic() {
         }
         printf("\n");
         printf("    OUT: ");
-        for (int j = 0; j < out_num_list[i]; j++) {
+        for (int j = 0; j < node_list[i]->out_num; j++) {
             printf("%s ", node_list[i]->out_gate[j]->name);
         }
         printf("\n");

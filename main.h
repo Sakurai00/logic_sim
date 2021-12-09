@@ -15,6 +15,7 @@ struct logic_gate {
     bool is_input;
     bool is_output;
     int in_num;
+    int out_num;
     struct logic_gate *in_gate[3];
     struct logic_gate *out_gate[MAX_GATE_NUM];
 };

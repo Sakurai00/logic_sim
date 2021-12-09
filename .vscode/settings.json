@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.vim": "plaintext",
+        "*.toml": "toml",
+        "sim.h": "c"
+    }
+}
